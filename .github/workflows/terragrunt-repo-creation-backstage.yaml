@@ -3,7 +3,16 @@ on:
     inputs:
       message:
         description: "Message to echo"
-        required: true
+        required: false
+      execution_id:
+        description: "Execution ID"
+        required: false
+      repo_name:
+        description: "Repo"
+        required: false
+      environment:
+        description: "Environment"
+        required: false
   pull_request:
 
 jobs:
