@@ -24,8 +24,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Sleep for 30 seconds
-        run: sleep 30
+      - name: Sleep for 5 seconds
+        run: sleep 5
         shell: bash
       - name: Echo Message
         run: echo "${{ inputs.message }}"
