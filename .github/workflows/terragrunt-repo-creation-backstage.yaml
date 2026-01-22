@@ -1,3 +1,5 @@
+name: Run CLI NestJS
+
 on:
   workflow_dispatch:
     inputs:
@@ -14,6 +16,8 @@ on:
         description: "Environment"
         required: false
   pull_request:
+
+run-name: ${{ github.event.inputs.execution_id }}
 
 jobs:
   echo:
