@@ -7,11 +7,15 @@ on:
         description: "Execution identifier"
         required: true
         type: string
-      repository_name:
+      project_name:
         description: "Target repository name"
         required: true
         type: string
-      components:
+      target_branch:
+        description: "Target branch"
+        required: true
+        type: string
+      args:
         description: "JSON string containing component configurations"
         required: true
         default: "{}"
@@ -29,14 +33,14 @@ jobs:
       - name: Print Raw Input
         run: |
           echo "Received raw JSON:"
-          echo '${{ github.event.inputs.components }}'
+          echo '${{ github.event.inputs.args }}'
 
       - name: Parse and Print Specific Values
         run: |
           timeout 60s bash -c '
-            REPOSITORY_NAME="${{ github.event.inputs.repository_name }}"
+            REPOSITORY_NAME="${{ github.event.inputs.project_name }}"
             EXECUTION_ID="${{ github.event.inputs.execution_id }}"
-            COMPONENTS="${{ github.event.inputs.components }}"
+            COMPONENTS="${{ github.event.inputs.args }}"
 
             echo "Repository Name: $REPOSITORY_NAME"
             echo "Execution ID: $EXECUTION_ID"
@@ -55,7 +59,7 @@ jobs:
           '
 
       - name: Conditional Step Example
-        if: ${{ fromJson(github.event.inputs.components).graphql.enabled == true }}
+        if: ${{ fromJson(github.event.inputs.args).graphql.enabled == true }}
         run: echo "GraphQL is enabled. Performing GraphQL specific tasks..."
 
       # - name: Force failure (test)
