@@ -46,7 +46,7 @@ jobs:
       - name: Parse and validate inputs
         id: inputs
         run: |
-          python3 ./scripts/nestjs-service-generator/validator.py \
+          python3 aplteste/ms-jarvis-bs/.github/workflows/scripts/nestjs-service-generator/validator.py \
             --project-name "${{ inputs.project_name }}" \
             --execution-id "${{ inputs.execution_id }}" \
             --args "${{ inputs.args }}" \
