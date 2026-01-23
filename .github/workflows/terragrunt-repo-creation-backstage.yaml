@@ -1,4 +1,4 @@
-name: Run CLI NestJS
+name: Terragran simulation
 
 on:
   workflow_dispatch:
@@ -22,7 +22,7 @@ run-name: ${{ github.event.inputs.execution_id }}
 jobs:
   echo:
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Echo Message
         run: echo "${{ inputs.message }}"
