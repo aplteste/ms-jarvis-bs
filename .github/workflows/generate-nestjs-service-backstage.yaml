@@ -1,0 +1,64 @@
+name: Run CLI NestJS
+
+on:
+  workflow_dispatch:
+    inputs:
+      execution_id:
+        description: "Execution identifier"
+        required: true
+        type: string
+      repository_name:
+        description: "Target repository name"
+        required: true
+        type: string
+      components:
+        description: "JSON string containing component configurations"
+        required: true
+        default: "{}"
+        type: string
+
+run-name: ${{ github.event.inputs.execution_id }}
+
+jobs:
+  run-cli:
+    name: Run CLI
+    runs-on: ubuntu-latest
+    timeout-minutes: 1
+
+    steps:
+      - name: Print Raw Input
+        run: |
+          echo "Received raw JSON:"
+          echo '${{ github.event.inputs.components }}'
+
+      - name: Parse and Print Specific Values
+        run: |
+          timeout 60s bash -c '
+            REPOSITORY_NAME="${{ github.event.inputs.repository_name }}"
+            EXECUTION_ID="${{ github.event.inputs.execution_id }}"
+            COMPONENTS="${{ github.event.inputs.components }}"
+
+            echo "Repository Name: $REPOSITORY_NAME"
+            echo "Execution ID: $EXECUTION_ID"
+
+            REST_STATUS=$(echo "$COMPONENTS" | jq -r ".rest.enabled")
+            GQL_STATUS=$(echo "$COMPONENTS" | jq -r ".graphql.enabled")
+            PG_HEALTH=$(echo "$COMPONENTS" | jq -r ".postgres.healthCheck")
+            REDIS_HEALTH=$(echo "$COMPONENTS" | jq -r ".redis.healthCheck")
+
+            echo "---------------------------------------"
+            echo "Rest Enabled: $REST_STATUS"
+            echo "GraphQL Enabled: $GQL_STATUS"
+            echo "Postgres HealthCheck: $PG_HEALTH"
+            echo "Redis HealthCheck: $REDIS_HEALTH"
+            echo "---------------------------------------"
+          '
+
+      - name: Conditional Step Example
+        if: ${{ fromJson(github.event.inputs.components).graphql.enabled == true }}
+        run: echo "GraphQL is enabled. Performing GraphQL specific tasks..."
+
+      # - name: Force failure (test)
+      #   run: |
+      #     echo "Forcing workflow failure for test"
+      #     exit 1
