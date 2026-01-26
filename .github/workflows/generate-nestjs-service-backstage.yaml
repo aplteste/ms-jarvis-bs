@@ -20,6 +20,16 @@ on:
         required: true
         default: "{}"
         type: string
+      description:
+        description: "Description"
+        required: false
+        default: ""
+        type: string
+      author:
+        description: "Author of requisition"
+        required: false
+        default: ""
+        type: string
 
 run-name: ${{ github.event.inputs.execution_id }}
 
