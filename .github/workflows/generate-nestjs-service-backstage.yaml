@@ -40,6 +40,9 @@ jobs:
           python-version: '3.11'
           # No cache needed since we only use standard library modules
   
+      - name: Print Raw Input
+        run: ls -la
+
       # ─────────────────────────────────────────────────────────────────────────
       # Parse and validate inputs (Python Script)
       # ─────────────────────────────────────────────────────────────────────────
@@ -49,7 +52,7 @@ jobs:
           JSON_ARGS: ${{ inputs.args }}
 
         run: |
-          python3 workflow-repo/.github/workflows/scripts/validator.py \
+          python3 .github/workflows/scripts/validator.py \
             --project-name "${{ inputs.project_name }}" \
             --execution-id "${{ inputs.execution_id }}" \
             --args "$JSON_ARGS" \
