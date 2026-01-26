@@ -40,8 +40,11 @@ jobs:
           python-version: '3.11'
           # No cache needed since we only use standard library modules
   
-      - name: Print Raw Input
-        run: ls -la
+      - name: Debug workflow files
+        run: |
+          ls -la .github/
+          ls -la .github/workflows/
+          ls -la .github/workflows/scripts/
 
       # ─────────────────────────────────────────────────────────────────────────
       # Parse and validate inputs (Python Script)
