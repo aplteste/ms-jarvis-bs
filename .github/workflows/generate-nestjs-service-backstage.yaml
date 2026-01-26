@@ -49,7 +49,7 @@ jobs:
           JSON_ARGS: ${{ inputs.args }}
 
         run: |
-          ls
+          ls \
           python3 .github/workflow/scripts/nestjs-service-generator/validator.py \
             --project-name "${{ inputs.project_name }}" \
             --execution-id "${{ inputs.execution_id }}" \
