@@ -120,7 +120,7 @@ jobs:
         if: ${{ fromJson(github.event.inputs.args).graphql.enabled == true }}
         run: echo "GraphQL is enabled. Performing GraphQL specific tasks..."
 
-      - name: Force failure (test)
-        run: |
-          echo "Forcing workflow failure for test"
-          exit 1
+      # - name: Force failure (test)
+      #   run: |
+      #     echo "Forcing workflow failure for test"
+      #     exit 1
