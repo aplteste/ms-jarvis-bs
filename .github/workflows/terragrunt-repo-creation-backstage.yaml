@@ -27,7 +27,7 @@ jobs:
       - name: Echo Message
         run: echo "${{ inputs.message }}"
 
-      - name: Force failure (test)
-        run: |
-          echo "Forcing workflow failure for test"
-          exit 1
+      # - name: Force failure (test)
+      #   run: |
+      #     echo "Forcing workflow failure for test"
+      #     exit 1
